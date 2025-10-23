@@ -1,9 +1,8 @@
 # build
-FROM golang:1.18.0 as builder
-ENV             GO111MODULE=on
+FROM golang:1.25 as builder
 WORKDIR         /go/src/moul.io/sshportal
 COPY            go.mod go.sum ./
-RUN             go mod download
+RUN             GOPROXY=goproxy.cn go mod download
 COPY            . ./
 RUN             make _docker_install
 
